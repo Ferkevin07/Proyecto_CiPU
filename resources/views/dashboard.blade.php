@@ -58,27 +58,27 @@
                 <!--Sidebar options-->
                 <nav class="flex-1 px-2 py-4 space-y-2 overflow-y-hidden hover:overflow-y-auto">
 
-                    @can('manage-directors')
+                    {{-- @can('manage-sellers') --}}
                     {{-- https://laravel.com/docs/8.x/requests#inspecting-the-request-path --}}
-                    <x-dropdown.simple.option class="w-full" :isActive="request()->routeIs('director.*')">
+                    <x-dropdown.simple.option class="w-full" :isActive="request()->routeIs('seller.*')">
                         <x-slot name="header">
                             <div>icono</div>
-                            <span>{{ __('Director') }}</span>
+                            <span>{{ __('Seller') }}</span>
                         </x-slot>
                         <x-slot name="content">
-                            <x-dropdown.simple.link :href="route('director.index')">
-                                {{ __('List directors') }}
+                            <x-dropdown.simple.link :href="route('seller.index')">
+                                {{ __('List sellers') }}
                             </x-dropdown.simple.link>
-                            <x-dropdown.simple.link :href="route('director.create')">
-                                {{ __('Create a new director') }}
+                            <x-dropdown.simple.link :href="route('seller.create')">
+                                {{ __('Create a new seller') }}
                             </x-dropdown.simple.link>
                         </x-slot>
                     </x-dropdown.simple.option>
 
-                    @endcan
+                    {{-- @endcan --}}
 
 
-                    @can('manage-guards')
+                    {{-- @can('manage-guards')
                     <x-dropdown.simple.option class="w-full" :isActive="request()->routeIs('guard.*')">
                         <x-slot name="header">
                             <div>icono</div>
@@ -93,9 +93,9 @@
                             </x-dropdown.simple.link>
                         </x-slot>
                     </x-dropdown.simple.option>
-                    @endcan
+                    @endcan --}}
 
-                    @can('manage-prisoners')
+                    {{-- @can('manage-prisoners')
                     <x-dropdown.simple.option title="Hello world" class="w-full" :isActive="request()->routeIs('prisoner.*')">
                         <x-slot name="header">
                             <div>icono</div>
@@ -110,9 +110,9 @@
                             </x-dropdown.simple.link>
                         </x-slot>
                     </x-dropdown.simple.option>
-                    @endcan
+                    @endcan --}}
 
-                    @can('manage-wards')
+                    {{-- @can('manage-wards')
 
                         <x-dropdown.simple.option class="w-full" :isActive="request()->routeIs('ward.*')">
                             <x-slot name="header">
@@ -129,10 +129,10 @@
                                 </x-dropdown.simple.link>
                             </x-slot>
                         </x-dropdown.simple.option>
-                    @endcan
+                    @endcan --}}
 
 
-                    @can('manage-jails')
+                    {{-- @can('manage-jails')
                         <x-dropdown.simple.option class="w-full" :isActive="request()->routeIs('jail.*')">
 
                             <x-slot name="header">
@@ -149,9 +149,9 @@
                                 </x-dropdown.simple.link>
                             </x-slot>
                         </x-dropdown.simple.option>
-                    @endcan
+                    @endcan --}}
 
-                    @can('manage-assignment')
+                    {{-- @can('manage-assignment')
                         <x-dropdown.simple.option class="w-full" :isActive="request()->routeIs('assignment.*')">
 
                             <x-slot name="header">
@@ -172,11 +172,12 @@
                             </x-slot>
 
                         </x-dropdown.simple.option>
-                   @endcan
+                   @endcan --}}
 
 
                     {{-- https://laravel.com/docs/9.x/authorization#via-blade-templates --}}
-                    @can('viewAny', App\Models\Report::class)
+
+                    {{-- @can('viewAny', App\Models\Report::class)
 
                         <x-dropdown.simple.option class="w-full" :isActive="request()->routeIs('report.*')">
 
@@ -200,7 +201,7 @@
 
                         </x-dropdown.simple.option>
 
-                      @endcan
+                      @endcan --}}
 
 
 

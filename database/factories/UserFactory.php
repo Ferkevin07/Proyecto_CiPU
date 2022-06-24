@@ -23,7 +23,7 @@ class UserFactory extends Factory
             'last_name'=> $this->faker->lastName(),
             'username'=> $this->faker->name(),
             'personal_phone'=> '09'.$this->faker->randomNumber(8),
-            'home_phone'=> '02'.$this->faker->randomnumber(7),
+            'home_phone'=> '02'.$this->faker->randomNumber(7),
             'address'=> $this->faker->streetAddress(),
             'birthdate'=>$this->faker->dateTimeBetween('-50 years','now'),
             'email' => $this->faker->unique()->safeEmail(),

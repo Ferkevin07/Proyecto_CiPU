@@ -28,6 +28,8 @@ return new class extends Migration
             $table->string('direction',60);
             //Descripcion proveedor
             $table->string('description',60)->nullable();
+            //estado del proveedor
+            $table->boolean('state')->default(true);
             
             //columnas de CREACION/ACTUALIZACION para la BDD
             $table->timestamps();

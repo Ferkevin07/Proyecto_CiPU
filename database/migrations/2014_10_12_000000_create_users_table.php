@@ -17,7 +17,7 @@ return new class extends Migration
             //ID para la tabla BDD
             $table->id();
             //Datos personales para la bd
-            $table->string('first_name',30);
+            $table->string('first_name',30)->nullable();;
             $table->string('last_name',30)->nullable();
             $table->string('username',50)->nullable();
             $table->string('personal_phone',11)->nullable();

@@ -26,6 +26,8 @@ return new class extends Migration
             $table->float('price_min',8,2);
             //precio maximo producto
             $table->float('price_max',8,2);
+            //estado del producto
+            $table->boolean('state')->default(true);
 
             //relacion
             $table->unsignedBigInteger('type_id');

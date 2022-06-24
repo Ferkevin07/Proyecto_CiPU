@@ -23,7 +23,6 @@ return new class extends Migration
             //nombre de usuario admin
             $table->string('username',30);
 
-
             //correo admin
             $table->string('email')->unique();
             //telefono admin
@@ -37,6 +36,11 @@ return new class extends Migration
 
             //estado de admin
             $table->boolean('state')->default(true);
+
+            //Creacion de cuenta bd
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
+            $table->rememberToken();
 
             //Relacion
             $table->unsignedBigInteger('role_id');
