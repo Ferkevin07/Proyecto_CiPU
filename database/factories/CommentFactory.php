@@ -17,7 +17,8 @@ class CommentFactory extends Factory
     {
         return[
             'details'=> $this->faker->text(50),
-            'ranking'=> $this->faker->numberBetween($min=1, $max=5)
+            'ranking'=> $this->faker->numberBetween($min=1, $max=5),
+            
             //randomElement(['high','mediun','low']);
         ];
     }

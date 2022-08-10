@@ -19,7 +19,8 @@ class DebtFactory extends Factory
             'to_pay'=>$this->faker->boolean(),
             'to_collect'=>$this->faker->boolean(),
             'details'=> $this->faker->text(50),
-            'price'=> $this->faker->randomFloat(2, 0, 100)
+            'price'=> $this->faker->randomFloat(2, 0, 100),
+            'state'=>$this->faker->boolean()
         ];
     }
 }

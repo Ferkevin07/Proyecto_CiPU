@@ -30,7 +30,7 @@ class SellerController extends Controller
     // Función para mostrar la vista principal de todo los directores
     public function index()
     {
-        // Traer el rol director
+        /* // Traer el rol director
         $seller_role = Role::where('name', 'seller')->first();
         // Obtener todos los usuarios que sean directores
         $sellers = $seller_role->managers();
@@ -49,7 +49,8 @@ class SellerController extends Controller
         //return view('seller.index', compact('sellers'));
         //return response()->json($sellers);
 
-        return SellerResource::collection(Manager::where('role_id',2)->get());
+        return SellerResource::collection(Manager::where('role_id',2)->get()); */
+        return response()->json('hola',200);
     }
 
 

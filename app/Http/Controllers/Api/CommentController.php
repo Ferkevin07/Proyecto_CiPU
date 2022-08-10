@@ -5,17 +5,21 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Comment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class CommentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
+    public function __construct()
+    {
+        $this->middleware('can:admin-manage-resources');
+    }
+
     public function index()
     {
-        return Comment::all();
+        $comments= Comment::all();
+        return response()->json($comments);
     }
 
     /**
@@ -44,7 +48,16 @@ class CommentController extends Controller
      */
     public function show($id)
     {
-        return Comment::find($id);
+        //$client=Auth::user();
+        $comment= Comment::find($id);
+        /* if(Gate::allows('client-manage-comments', $comment)){
+            return 'permitido';
+        }else{
+            return response()->json('message: This action is unauthorized');
+        } */
+        //$this->authorize('author', $comment);
+
+        return $comment;
     }
 
     /**
@@ -89,4 +102,22 @@ class CommentController extends Controller
         $comment->save();
         return $comment;
     }
+
+    /* public function indexClient(){
+        $user=Auth::user();
+        $user_id=$user->id;
+        $comments=Comment::where('user_id',$user_id)->get();
+        return response()->json($comments);
+    }
+
+    public function showClient($id){
+        $user=Auth::user();
+        $user_id=$user->id;
+        $comment=Comment::find($id);
+        if($user_id===$comment->user_id){
+            return response()->json($comment);
+        }else{
+            return response()->json('This action is NO');
+        }   
+    } */
 }

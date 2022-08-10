@@ -9,5 +9,8 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class TypeFactory extends Factory
 {
-    
+    public function definition()
+    {
+        
+    }
 }

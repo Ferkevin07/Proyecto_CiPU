@@ -13,12 +13,12 @@ class CommentSeeder extends Seeder
     public function run()
     {
         //se trae todos los usuario con state activo
-        $users=User::where('state',true)->get();
+        $clients=User::where('role_id','4')->get();
         //dd($users);
         //se crea 2 comentarios por usuario
-        $users->each(function($user)
+        $clients->each(function($client)
         {
-            Comment::factory()->count(2)->for($user)->create();
+            Comment::factory()->count(2)->for($client)->create();
         });
     }
 }

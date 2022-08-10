@@ -8,11 +8,11 @@ use Illuminate\Http\Request;
 
 class ProviderController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+        $this->middleware('can:manage-providers');
+    }
+
     public function index()
     {
         return Provider::all();

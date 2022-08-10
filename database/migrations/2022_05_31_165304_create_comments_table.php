@@ -21,9 +21,18 @@ return new class extends Migration
             //estado de revisado de comentario
             $table->boolean('state')->default(true);
             //ranking de comentario
-            $table->string('ranking');
+            $table->string('ranking')->default(1);
             //numero
             //enum('difficulty', ['low', 'high'])->default('low');
+
+            /* //relacion
+            $table->unsignedBigInteger('client_id');
+            //un usuario puede tener uno o mas comentarios y un comentario le pertenece a un usuario
+            $table->foreign('client_id')
+                ->references('id')
+                ->on('clients')
+                ->onDelete('cascade')
+                ->onUpdate('cascade'); */
 
             //relacion
             $table->unsignedBigInteger('user_id');

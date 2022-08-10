@@ -47,6 +47,21 @@
                     <div class="w-8 max-h-full h-14 text-gray-500">icono</div>
 
                     <span class="text-gray-800 text-2xl font-bold uppercase tracking-wide text-center">
+                        {{ Auth::user()->role_id}}
+
+
+
+                    </span>
+
+                </a>
+
+                <!--User role-->
+                <a href="{{ route('dashboard') }}"
+                    class="flex items-center justify-center h-auto space-x-2 mx-5 border-b-2 flex-wrap">
+
+                    <div class="w-8 max-h-full h-14 text-gray-500">icono</div>
+
+                    <span class="text-gray-800 text-2xl font-bold uppercase tracking-wide text-center">
                         {{ Auth::user()->first_name}}
 
 
@@ -54,6 +69,8 @@
                     </span>
 
                 </a>
+
+                
 
                 <!--Sidebar options-->
                 <nav class="flex-1 px-2 py-4 space-y-2 overflow-y-hidden hover:overflow-y-auto">

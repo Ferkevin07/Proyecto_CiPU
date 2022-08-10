@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
-    // Función para realizar el proceso de login
+    // Función para realizar el proceso de login PROPIO DE LARAVEL, NO UTILIZADO
     public function login(LoginRequest $request)
     {
         // Ejecuta el método de la clase LoginRequest

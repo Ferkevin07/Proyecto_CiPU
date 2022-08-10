@@ -9,8 +9,9 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
 use Carbon\Carbon;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable
+class User extends Authenticatable implements JWTSubject
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -23,6 +24,7 @@ class User extends Authenticatable
         'username',
         'last_name',
         'first_name',
+        'role_id',
         'email',
         'password',
     ];
@@ -46,14 +48,19 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function comments()
+    public function role()
     {
-        return $this->hasMany(Comment::class);
+        return $this->belongsTo(Role::class);
     }
 
     public function debts()
     {
         return $this->hasMany(Debt::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
     }
 
     public function orders()
@@ -66,5 +73,31 @@ class User extends Authenticatable
         return isset($value) ? Carbon::parse($value)->format('d/m/Y') : null;
     }
 
-    
+    public function getFullName()
+    {
+        return "$this->first_name $this->last_name";
+    }
+
+    public function hasRole($id)
+    {
+        if($id === 1){
+            return "ADMIN";
+        }elseif($id === 2){
+            return "VENDEDOR";
+        }elseif($id === 3){
+            return "PASANTE";
+        }elseif($id === 4){
+            return "CLIENTE";
+        }
+    }
+
+    //Metodos JWT
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
 }

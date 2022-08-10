@@ -3,15 +3,19 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Type;
 use Illuminate\Http\Request;
-use App\Models\Manager;
 
-class SellerController extends Controller
+class TypeController extends Controller
 {
-    
+    public function __construct()
+    {
+        $this->middleware('can:manage-types');
+    }
+
     public function index()
     {
-        return Manager::where('role_id',3)->get();
+        return Type::all();
     }
 
     /**
@@ -23,14 +27,10 @@ class SellerController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'first_name'=> ['required'],
-            //'last_name'=> ['required'],
-            'username' => ['required'],
-            'email' => ['required'],
-            
+            'name'=> ['required'],
         ]);
 
-        return Manager::create($request->all());
+        return Type::create($request->all());
     }
 
     /**
@@ -41,7 +41,7 @@ class SellerController extends Controller
      */
     public function show($id)
     {
-        //
+        return Type::find($id);
     }
 
     /**
@@ -53,7 +53,17 @@ class SellerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name'=> ['required'],
+        ]);
+
+        $type= Type::find($id);
+
+        $type->update([
+            "name" => $request['name'],
+        ]);
+
+        return $type;
     }
 
     /**
@@ -64,6 +74,11 @@ class SellerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $type= Type::find($id);
+
+        return response()->json([
+            'name'=>"$type->name, the roles can't be deleted",
+            'code'=>'400',
+        ]);
     }
 }

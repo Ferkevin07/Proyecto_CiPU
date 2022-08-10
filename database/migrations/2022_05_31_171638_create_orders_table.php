@@ -23,14 +23,23 @@ return new class extends Migration
             //detalles pedido
             $table->string('details',60);
 
-             //relacion
-             $table->unsignedBigInteger('user_id');
+            /*  //relacion
+             $table->unsignedBigInteger('client_id');
              //un usuario puede tener uno o mas pedidos y un pedido le pertenece a un usuario
-             $table->foreign('user_id')
+             $table->foreign('client_id')
                  ->references('id')
-                 ->on('users')
+                 ->on('clients')
                  ->onDelete('cascade')
-                 ->onUpdate('cascade');
+                 ->onUpdate('cascade'); */
+            
+            //relacion
+            $table->unsignedBigInteger('user_id');
+            //un usuario puede tener uno o mas pedidos y un pedido le pertenece a un usuario
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
 
             //columnas de CREACION/ACTUALIZACION para la BDD
             $table->timestamps();

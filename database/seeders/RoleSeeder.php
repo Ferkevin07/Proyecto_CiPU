@@ -10,13 +10,14 @@ class RoleSeeder extends Seeder
 {
     public function run()
     {
-        $rols =['admin','seller','passant'];
+        $rols =['admin','seller','passant','client'];
 
-        for($i=0; $i<3; $i++)
+        for($i=0; $i<4; $i++)
         {
             Role::create([
                 'name'=>$rols[$i]
             ]);
         }
+
     }
 }

@@ -14,11 +14,11 @@ class OrderSeeder extends Seeder
     public function run()
     {
         //se trae todos los usuario con state activo
-        $users=User::all();
+        $clients=User::where('role_id','4')->get();
         //se crea 2 comentarios por usuario
-        $users->each(function($user)
+        $clients->each(function($client)
         {
-            Order::factory()->count(3)->for($user)->create();
+            Order::factory()->count(3)->for($client)->create();
         });
 
         $orders=Order::all();

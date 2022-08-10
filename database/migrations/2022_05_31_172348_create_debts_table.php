@@ -24,6 +24,8 @@ return new class extends Migration
             $table->float('price',8,2);
             //deuda para pagar
             $table->string('details',60);
+            //estado de la deuda
+            $table->boolean('state')->default(false);
 
             //Relacion
             $table->unsignedBigInteger('user_id')->nullable();
@@ -34,14 +36,14 @@ return new class extends Migration
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
-            //Relacion
-            $table->unsignedBigInteger('manager_id')->nullable();
+            /* //Relacion
+            $table->unsignedBigInteger('client_id')->nullable();
             //un administrador puede tener una deuda y una deuda le pertenece a un administrador
-            $table->foreign('manager_id')
+            $table->foreign('client_id')
                 ->references('id')
-                ->on('managers')
+                ->on('clients')
                 ->onDelete('cascade')
-                ->onUpdate('cascade');
+                ->onUpdate('cascade'); */
 
             //columnas de CREACION/ACTUALIZACION para la BDD
             $table->timestamps();
