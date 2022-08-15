@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Api\client;
 
 use App\Http\Controllers\Controller;
+use App\Mail\CommentMailable;
 use App\Models\Comment;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class CommentController extends Controller
 {
@@ -56,24 +58,25 @@ class CommentController extends Controller
         $request->user_id=$user_id;
         $request->input('user_id',$user_id);
 
-        
-
         $request->validate([
             'details'=> ['required'],
             /* 'state'=> 1,*/
-            
             //'user_id' => ['required'], 
         ]);
         //$details=$request;
 
         $comment = Comment::create([
             'details'=>$request->details,
-            'user_id'=> 7,
+            'user_id'=> $user_id,
             'state'=> 1,
-            'ranking'=>1]);
+            'ranking'=>1
+        ]);
         //$comp=$request->user_id;
         //$request->mergeIfMissing(['user_id' => $user_id]);
         //return $request->details;
+
+        Mail::to('ferkevin@gmail.com')->send(new CommentMailable($user));
+
         return $comment;
     }
 
@@ -87,7 +90,7 @@ class CommentController extends Controller
     {
         $comment = Comment::find($id);
         //Politica de verificacion de autoria del comentario
-        $this->authorize('isAuthor',$comment);
+        $this->authorize('isAuthorC',$comment);
         return $comment;
     }
 

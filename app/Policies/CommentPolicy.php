@@ -11,24 +11,18 @@ class CommentPolicy
 {
     use HandlesAuthorization;
 
-    public function isAuthor(User $user, Comment $comment)
+    /* public function isAuthor(User $user, Comment $comment)
     {
-        return $comment->user_id === $user->id;
-    }
-}
-
-
-/* public function isActive(User $user, Comment $comments){
-
-        return 
+        return false;
+        //$comment->user_id === $user->id;
     } */
 
-class OrderPolicy
-{
-    use HandlesAuthorization;
-
-    public function isAuthor(User $user, Order $order)
+    public function isClient(User $user, User $client)
     {
-        return $order->user_id === $user->id;
+        if($client->role->id===4){
+            return true;
+        }else{
+            return false;
+        }
     }
 }

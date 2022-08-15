@@ -13,13 +13,9 @@ class Order extends Model
         'name',
         'state',
         'details',
-        'client_id',
+        'user_id',
     ];
 
-    public function client()
-    {
-        return $this->belongsTo(Client::class);
-    }
 
     public function user()
     {

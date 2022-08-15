@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Comment;
@@ -13,7 +13,7 @@ class CommentController extends Controller
     
     public function __construct()
     {
-        $this->middleware('can:admin-manage-resources');
+        $this->middleware('can:manager-manage-resources');
     }
 
     public function index()
@@ -55,7 +55,7 @@ class CommentController extends Controller
         }else{
             return response()->json('message: This action is unauthorized');
         } */
-        //$this->authorize('author', $comment);
+        $this->authorize('isClient', $comment);
 
         return $comment;
     }

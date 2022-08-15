@@ -1,17 +1,30 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+
+use App\Http\Controllers\Api\admin\CommentController as CommentController;
+use App\Http\Controllers\Api\admin\DebtController as DebtController;
+use App\Http\Controllers\Api\admin\AssistantController as AssistantController;
+use App\Http\Controllers\Api\admin\OrderController as OrderController;
+use App\Http\Controllers\Api\admin\ProductController as ProductController;
+use App\Http\Controllers\Api\admin\ProviderController as ProviderController;
+use App\Http\Controllers\Api\admin\RoleController as RoleController;
+use App\Http\Controllers\Api\admin\TypeController as TypeController;
+use App\Http\Controllers\Api\admin\ClientController as ClientController;
+
+use App\Http\Controllers\Api\assistent\CommentController as AssistantCommentController;
+use App\Http\Controllers\Api\assistent\DebtController as AssistantDebtController;
+
+use App\Http\Controllers\Api\client\OrderController as ClientOrderController;
 use App\Http\Controllers\Api\client\CommentController as ClientCommentController;
-use App\Http\Controllers\Api\CommentController;
-use App\Http\Controllers\Api\DebtController;
-use App\Http\Controllers\Api\ClientController;
-use App\Http\Controllers\Api\OrderController;
+use App\Http\Controllers\Api\client\ProductController as ClientProductController;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\SellerController;
-use App\Http\Controllers\Api\ProductController;
-use App\Http\Controllers\Api\ProviderController;
+
+
 use App\Http\Controllers\Api\UserController;
 use App\Http\Middleware\JwtMiddleware;
 use App\Mail\ConfirmationMailable;
@@ -90,6 +103,25 @@ Route::middleware('jwt.verify')->group(function()
     Route::get('/types/{type}',[TypeController::class,'show']);
     Route::put('/types/{type}',[TypeController::class,'update']);
     Route::delete('/types/{type}',[TypeController::class,'destroy']);
+    //Clients
+    Route::get('/clients',[ClientController::class,'index']);
+    Route::post('/clients',[ClientController::class,'store']);
+    Route::get('/clients/{client}',[ClientController::class,'show']);
+    Route::put('/clients/{client}',[ClientController::class,'update']);
+    Route::delete('/clients/{client}',[ClientController::class,'destroy']);
+    //Assistants
+    Route::get('/assistants',[AssistantController::class,'index']);
+    Route::post('/assistants',[AssistantController::class,'store']);
+    Route::get('/assistants/{assistant}',[AssistantController::class,'show']);
+    Route::put('/assistants/{assistant}',[AssistantController::class,'update']);
+    Route::delete('/assistants/{assistant}',[AssistantController::class,'destroy']);
+
+    //Debt -> ASSISTANT
+    Route::get('/debts-assistant',[AssistantDebtController::class,'index']);
+    Route::post('/debts-assistant',[AssistantDebtController::class,'store']);
+    Route::get('/debts-assistant/{debt}',[AssistantDebtController::class, 'show']);
+    Route::put('/debts-assistant/{debt}',[AssistantDebtController::class, 'update']);
+    Route::delete('/debts-assistant/{debt}',[AssistantDebtController::class, 'destroy']);
 
     //Comments -> CLIENT
     Route::get('/comments-client',[ClientCommentController::class,'index']);
@@ -98,6 +130,15 @@ Route::middleware('jwt.verify')->group(function()
     Route::get('/comments-client/{comment}',[ClientCommentController::class, 'show']);
     Route::put('/comments-client/{comment}',[ClientCommentController::class, 'update']);
     Route::delete('/comments-client/{comment}',[ClientCommentController::class, 'destroy']);
+    //Orders -> CLIENT
+    Route::get('/orders-client',[ClientOrderController::class, 'index']);
+    Route::post('/orders-client',[ClientOrderController::class, 'store']);
+    Route::get('/orders-client/{order}',[ClientOrderController::class, 'show']);
+    Route::put('/orders-client/{order}',[ClientOrderController::class, 'update']);
+    Route::delete('/orders-client/{order}',[ClientOrderController::class, 'destroy']);
+    //Products -> CLIENT
+    Route::get('/products-client',[ClientProductController::class, 'index']);
+    Route::get('/products-client/{product}',[ClientProductController::class, 'show']);
 
     Route::get('/nuevo', function(){
         $user=Auth::user();

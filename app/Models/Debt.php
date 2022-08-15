@@ -15,7 +15,7 @@ class Debt extends Model
         'price',
         'details',
         'user_id',
-        'client_id',
+        'state',
     ];
 
     public function user()
@@ -23,8 +23,5 @@ class Debt extends Model
          return $this->belongsTo(User::class);
     }
 
-    public function client()
-    {
-        return $this->belongsTo(Client::class);
-    }
+    
 }

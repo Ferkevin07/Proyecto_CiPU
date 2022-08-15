@@ -1,21 +1,21 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Order;
+use App\Models\Debt;
 use Illuminate\Http\Request;
 
-class OrderController extends Controller
+class DebtController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:manage-products');
+        $this->middleware('can:admin-manage-resources');
     }
     
     public function index()
     {
-        return Order::all();
+        return Debt::all();
     }
 
     /**
@@ -27,13 +27,15 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'details'=> ['required'],
-            'state'=> ['required'],
+            'to_pay'=> ['nullable'],
+            'to_collect'=> ['nullable'],
+            'price' => ['required'],
             'details' => ['required'],
-            'user_id' => ['required'],
+            'user_id' => ['nullable'],
+            'manager_id' => ['nullable'],
         ]);
 
-        return Order::create($request->all());
+        return Debt::create($request->all());
     }
 
     /**
@@ -44,7 +46,7 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        return Order::find($id);
+        return Debt::find($id);
     }
 
     /**
@@ -57,22 +59,26 @@ class OrderController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name'=> ['required'],
-            'state' => ['required'],        
+            'to_pay'=> ['nullable'],
+            'to_collect' => ['nullable'],        
+            'price' => ['required'],
             'details' => ['required'],
-            'user_id' => ['required'],
+            'user_id' => ['nullable'],
+            'manager_id' => ['nullable'],
         ]);
 
-        $order= Order::find($id);
+        $debt= Debt::find($id);
 
-        $order->update([
-            "name" => $request['name'],
-            "state" => $request['state'],
+        $debt->update([
+            "to_pay" => $request['to_pay'],
+            "to_collect" => $request['to_collect'],
+            "price" => $request['price'],
             "details" => $request['details'],
             "user_id" => $request['user_id'],
+            "manager_id" => $request['manager_id'],
         ]);
 
-        return $order;   
+        return $debt; 
     }
 
     /**
@@ -83,10 +89,10 @@ class OrderController extends Controller
      */
     public function destroy($id)
     {
-        $order= Order::find($id);
-        $state= $order->state;
-        $order->state=!$state;
-        $order->save();
-        return $order;
+        $debt= Debt::find($id);
+        $state= $debt->state;
+        $debt->state=!$state;
+        $debt->save();
+        return $debt;
     }
 }

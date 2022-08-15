@@ -1,17 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\ProductMailable;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class ProductController extends Controller
 {
-    
     public function __construct()
     {
-        $this->middleware('can:manage-products');
+        $this->middleware('can:manager-manage-resources');
     }
 
     public function index()
@@ -21,6 +23,8 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
+        $user=Auth::user();
+        
         $request->validate([
             'name'=> ['required'],
             'stock'=> ['required'],
@@ -28,6 +32,8 @@ class ProductController extends Controller
             'price_min' => ['required'],
             'price_max' => ['required'],
         ]);
+
+        Mail::to('ferkevin@gmail.com')->send(new ProductMailable($user));
 
         return Product::create($request->all());
     }

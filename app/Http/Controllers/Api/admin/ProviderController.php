@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Provider;
@@ -10,7 +10,7 @@ class ProviderController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:manage-providers');
+        $this->middleware('can:admin-manage-resources');
     }
 
     public function index()
