@@ -12,7 +12,7 @@ Desarrollo de un backend para automatizar el proceso de control y gestión de in
 
 ## Manual de usuario
 
-El manual de usuario esta disponible en la plataforma de YouTube, el link directo hacia este video esta disponible aquí. => [manual de usuario](https://youtu.be/OlmJLg6xbV0) 
+El manual de usuario esta disponible en la plataforma de YouTube, el link directo hacia este video esta disponible aquí. => [manual de usuario](https://youtu.be/UTOppH5ooHY) 
 
 
 
